@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/item")
@@ -87,14 +88,16 @@ public class ItemController {
     @PutMapping("/{id}/status")
     public Result<Void> updateItemStatus(
             @PathVariable Long id,
-            @RequestBody Integer status,
+            @RequestBody Map<String, Integer> body,
             HttpServletRequest request) {
         // TODO: 实现更新商品状态接口
         // 提示：
         // 1. 从 request attribute 获取 userId
         //    Long userId = (Long) request.getAttribute("userId");
-        // 2. 调用 itemService.updateItemStatus(id, status, userId)
-        // 3. 返回 Result.success()
+        // 2. 从 body 获取 status
+        //    Integer status = body.get("status");
+        // 3. 调用 itemService.updateItemStatus(id, status, userId)
+        // 4. 返回 Result.success()
 
         return null;
     }

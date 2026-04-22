@@ -156,6 +156,12 @@ SELECT COUNT(*) FROM item WHERE status = 0
 - `getMyOrders(userId)`：同时查买入和卖出的订单
 - `updateOrderStatus(orderId, status, userId)`：验证权限后更新状态
 
+**ImServiceImpl 实现思路**：
+- `generateUserSig(userId)`：使用腾讯云 IM 的 TLSSigAPIv2 工具类生成 UserSig
+- UserSig 是腾讯云 IM 的身份凭证，有效期 180 天
+- 需要配置 SDKAppID 和 SecretKey（从 application.yml 读取）
+- 前端用 UserSig 初始化 IM SDK，实现聊天功能
+
 ---
 
 ### Controller 层（controller/）
@@ -184,6 +190,24 @@ public Result<Long> publishItem(@RequestBody @Valid ItemDTO dto, HttpServletRequ
     return Result.success(itemId);
 }
 ```
+
+#### ImController 说明
+
+ImController 提供腾讯云 IM 相关接口：
+
+```java
+@GetMapping("/getUserSig")
+public Result<Map<String, String>> getUserSig(HttpServletRequest request) {
+    Long userId = (Long) request.getAttribute("userId");  // 从 token 取
+    String userSig = imService.generateUserSig(userId.toString());
+    Map<String, String> data = new HashMap<>();
+    data.put("userId", userId.toString());
+    data.put("userSig", userSig);
+    return Result.success(data);
+}
+```
+
+前端调用此接口获取 UserSig，用于初始化腾讯云 IM SDK。SDKAppID 在前端配置文件中写死，SecretKey 保存在后端，不暴露给前端。
 
 ---
 

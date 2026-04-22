@@ -35,6 +35,7 @@
 - 订单创建与管理
 - 我的发布/订单查询
 - 商品/订单状态更新
+- 腾讯云 IM 签名获取（用于前端接入即时聊天）
 
 **不包含的功能**：支付系统、后端聊天系统（使用第三方 IM）、推荐算法
 
@@ -47,11 +48,13 @@ src/main/java/com/example/xyzmarket/
 ├── controller/          # 控制器层（RESTful API）
 │   ├── UserController.java
 │   ├── ItemController.java
-│   └── OrderController.java
+│   ├── OrderController.java
+│   └── ImController.java
 ├── service/             # 业务逻辑层
 │   ├── UserService.java
 │   ├── ItemService.java
 │   ├── OrderService.java
+│   ├── ImService.java
 │   └── impl/            # 实现类
 ├── mapper/              # 数据访问层（MyBatis 注解）
 │   ├── UserMapper.java
@@ -212,9 +215,34 @@ Authorization: Bearer <token>
 
 #### 更新订单状态（需认证）
 ```
-PUT /api/order/{id}/status?status=1
+PUT /api/order/{id}/status
 Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "status": 2
+}
 ```
+
+### IM 接口
+
+#### 获取 UserSig（需认证）
+```
+GET /api/im/getUserSig
+Authorization: Bearer <token>
+
+Response:
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "userId": "123",
+    "userSig": "eJw1jdEKgjAYhV8l7Lq0..."
+  }
+}
+```
+
+用于前端初始化腾讯云 IM SDK。`userSig` 有效期 180 天。SDKAppID 在前端配置文件中直接写入，无需从后端获取。
 
 ---
 
@@ -249,6 +277,11 @@ wx:
 jwt:
   secret: 你的 JWT 密钥（至少 32 字符）
   expiration: 604800000  # 7天，单位毫秒
+
+tencent:
+  im:
+    sdkAppId: 你的腾讯云 IM SDKAppID
+    secretKey: 你的腾讯云 IM SecretKey
 ```
 
 ### 4. 启动项目
