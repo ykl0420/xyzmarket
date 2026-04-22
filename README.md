@@ -68,6 +68,8 @@ src/main/java/com/example/xyzmarket/
 │   ├── WxLoginDTO.java
 │   ├── ItemDTO.java
 │   └── OrderDTO.java
+├── vo/                  # 返回对象封装
+│   └── PageResult.java
 ├── config/              # 配置类
 │   ├── MyBatisConfig.java
 │   ├── WxConfig.java
@@ -175,6 +177,16 @@ Content-Type: application/json
 #### 商品列表（无需认证）
 ```
 GET /api/item/list?page=1&size=10
+
+Response:
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "list": [...],
+    "total": 100
+  }
+}
 ```
 
 #### 商品详情（无需认证）

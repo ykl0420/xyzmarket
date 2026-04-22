@@ -48,4 +48,11 @@ public interface ItemMapper {
      */
     int updateStatus(@Param("id") Long id, @Param("status") Integer status);
 
+    /**
+     * 统计在售商品总数
+     * TODO: 实现 SQL
+     * 提示：SELECT COUNT(*) FROM item WHERE status = 1
+     */
+    long countAvailable();
+
 }

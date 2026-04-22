@@ -64,6 +64,52 @@ DTO = Data Transfer Object，用于接收前端传来的请求参数。
 
 ---
 
+### VO（vo/）
+
+VO = Value Object，用于封装返回给前端的数据。
+
+**和 Entity 的区别**：
+- Entity 是数据库表的映射，字段与数据库一一对应
+- VO 是为前端定制的返回格式，可能包含多个 Entity 的组合或特殊的数据结构
+
+**本项目的 VO**：
+
+**PageResult.java** - 分页结果封装
+
+```java
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PageResult<T> {
+    private List<T> list;   // 数据列表
+    private Long total;     // 总记录数
+}
+```
+
+**使用场景**：商品列表分页查询
+
+```java
+// Service 层返回
+PageResult<Item> result = new PageResult<>(items, total);
+
+// Controller 层返回给前端
+return Result.success(result);
+
+// 前端收到的数据格式
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "list": [...],
+    "total": 100
+  }
+}
+```
+
+前端可以用 `total` 计算总页数：`Math.ceil(total / size)`
+
+---
+
 ### Mapper 层（mapper/）
 
 用 MyBatis 注解直接在接口方法上写 SQL。
@@ -148,7 +194,7 @@ SELECT COUNT(*) FROM item WHERE status = 0
 
 **ItemServiceImpl 实现思路**：
 - `publishItem(dto, sellerId)`：创建 Item 对象，设置 sellerId，调用 insert
-- `getItemList(page, size)`：计算 offset = (page-1)*size，调用 findList
+- `getItemList(page, size)`：计算 offset = (page-1)*size，调用 findList 和 countAvailable，返回 PageResult 对象
 - `updateItemStatus(id, status, userId)`：先查商品验证是否是本人，再更新
 
 **OrderServiceImpl 实现思路**：

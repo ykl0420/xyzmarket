@@ -168,21 +168,28 @@ data: {
 {
   "code": 200,
   "message": "success",
-  "data": [
-    {
-      "id": 1,
-      "title": "二手自行车",
-      "description": "9成新",
-      "price": 200.00,
-      "imageUrl": "https://...",
-      "sellerId": 10,
-      "status": 1,
-      "createTime": "2026-04-22T10:30:00",
-      "updateTime": "2026-04-22T10:30:00"
-    }
-  ]
+  "data": {
+    "list": [
+      {
+        "id": 1,
+        "title": "二手自行车",
+        "description": "9成新",
+        "price": 200.00,
+        "imageUrl": "https://...",
+        "sellerId": 10,
+        "status": 1,
+        "createTime": "2026-04-22T10:30:00",
+        "updateTime": "2026-04-22T10:30:00"
+      }
+    ],
+    "total": 100
+  }
 }
 ```
+
+**字段说明**：
+- `list`：商品列表数组
+- `total`：符合条件的商品总数（用于计算总页数）
 
 
 ---
@@ -273,7 +280,7 @@ data: {
 {
   "code": 200,
   "message": "success",
-  "data": null
+  "data": {}
 }
 ```
 
@@ -364,7 +371,7 @@ data: {
 {
   "code": 200,
   "message": "success",
-  "data": null
+  "data": {}
 }
 ```
 

@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,7 @@ public class OrderController {
      * 需要 JWT 认证，仅买家或卖家可操作
      */
     @PutMapping("/{id}/status")
-    public Result<Void> updateOrderStatus(
+    public Result<Map<String, Object>> updateOrderStatus(
             @PathVariable Long id,
             @RequestBody Map<String, Integer> body,
             HttpServletRequest request) {
@@ -67,7 +68,7 @@ public class OrderController {
         // 2. 从 body 获取 status
         //    Integer status = body.get("status");
         // 3. 调用 orderService.updateOrderStatus(id, status, userId)
-        // 4. 返回 Result.success()
+        // 4. 返回 Result.success(new HashMap<>())
 
         return null;
     }

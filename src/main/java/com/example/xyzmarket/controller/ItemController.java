@@ -4,11 +4,13 @@ import com.example.xyzmarket.common.Result;
 import com.example.xyzmarket.dto.ItemDTO;
 import com.example.xyzmarket.entity.Item;
 import com.example.xyzmarket.service.ItemService;
+import com.example.xyzmarket.vo.PageResult;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,13 +42,14 @@ public class ItemController {
      * 无需认证
      */
     @GetMapping("/list")
-    public Result<List<Item>> getItemList(
+    public Result<PageResult<Item>> getItemList(
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer size) {
         // TODO: 实现商品列表查询接口
         // 提示：
         // 1. 调用 itemService.getItemList(page, size)
-        // 2. 返回 Result.success(itemList)
+        // 2. 返回 Result.success(pageResult)
+        // 注意：返回的是 PageResult 对象，包含 list 和 total 两个字段
 
         return null;
     }
@@ -86,7 +89,7 @@ public class ItemController {
      * 需要 JWT 认证，仅发布者可操作
      */
     @PutMapping("/{id}/status")
-    public Result<Void> updateItemStatus(
+    public Result<Map<String, Object>> updateItemStatus(
             @PathVariable Long id,
             @RequestBody Map<String, Integer> body,
             HttpServletRequest request) {
@@ -97,7 +100,7 @@ public class ItemController {
         // 2. 从 body 获取 status
         //    Integer status = body.get("status");
         // 3. 调用 itemService.updateItemStatus(id, status, userId)
-        // 4. 返回 Result.success()
+        // 4. 返回 Result.success(new HashMap<>())
 
         return null;
     }

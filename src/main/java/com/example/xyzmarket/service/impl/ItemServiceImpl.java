@@ -4,6 +4,7 @@ import com.example.xyzmarket.dto.ItemDTO;
 import com.example.xyzmarket.entity.Item;
 import com.example.xyzmarket.mapper.ItemMapper;
 import com.example.xyzmarket.service.ItemService;
+import com.example.xyzmarket.vo.PageResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +35,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> getItemList(Integer page, Integer size) {
+    public PageResult<Item> getItemList(Integer page, Integer size) {
         // TODO: 实现商品列表查询（分页）
         // 提示：
         // 1. 计算偏移量：int offset = (page - 1) * size;
         // 2. 查询商品列表：List<Item> items = itemMapper.findList(offset, size);
-        // 3. 返回 items
+        // 3. 查询总数：long total = itemMapper.countAvailable();
+        // 4. 返回 new PageResult<>(items, total)
 
         return null;
     }

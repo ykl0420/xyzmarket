@@ -2,6 +2,7 @@ package com.example.xyzmarket.service;
 
 import com.example.xyzmarket.dto.ItemDTO;
 import com.example.xyzmarket.entity.Item;
+import com.example.xyzmarket.vo.PageResult;
 
 import java.util.List;
 
@@ -19,9 +20,9 @@ public interface ItemService {
      * 获取商品列表（分页）
      * @param page 页码
      * @param size 每页数量
-     * @return 商品列表
+     * @return 分页结果（包含商品列表和总数）
      */
-    List<Item> getItemList(Integer page, Integer size);
+    PageResult<Item> getItemList(Integer page, Integer size);
 
     /**
      * 获取商品详情
