@@ -3,9 +3,9 @@ server:
 
 spring:
   application:
-    name: campus-market
+    name: xyz-market
   datasource:
-    url: jdbc:mysql://localhost:3306/campus_market?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/xyz_market?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

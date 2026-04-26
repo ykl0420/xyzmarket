@@ -24,20 +24,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long wxLogin(WxLoginDTO wxLoginDTO) {
         // TODO: 实现微信登录逻辑
-        // 提示：
-        // 1. 调用微信 API 获取 openid
-        //    String result = httpClientUtil.code2Session(
-        //        wxConfig.getAppid(), wxConfig.getSecret(), wxLoginDTO.getCode());
-        // 2. 解析 JSON 获取 openid
-        // 3. 根据 openid 查询用户
-        //    User user = userMapper.findByOpenid(openid);
-        // 4. 如果用户不存在，创建新用户
-        //    if (user == null) {
-        //        user = new User();
-        //        user.setOpenid(openid);
-        //        userMapper.insert(user);
-        //    }
-        // 5. 返回 user.getId()
+        // 思路：通过 code 换取 openid，查询或创建用户，返回用户ID
+        // 需要用到：httpClientUtil, wxConfig, userMapper
 
         return null;
     }
@@ -45,7 +33,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByOpenid(String openid) {
         // TODO: 根据 openid 查询用户
-        // 提示：直接调用 userMapper.findByOpenid(openid)
 
         return null;
     }

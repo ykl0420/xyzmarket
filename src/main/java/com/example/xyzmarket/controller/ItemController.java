@@ -28,11 +28,7 @@ public class ItemController {
     @PostMapping
     public Result<Long> publishItem(@Valid @RequestBody ItemDTO itemDTO, HttpServletRequest request) {
         // TODO: 实现发布商品接口
-        // 提示：
-        // 1. 从 request attribute 获取 userId（由拦截器设置）
-        //    Long sellerId = (Long) request.getAttribute("userId");
-        // 2. 调用 itemService.publishItem(itemDTO, sellerId)
-        // 3. 返回 Result.success(itemId)
+        // 思路：从 request 获取当前用户ID，调用 service 发布商品
 
         return null;
     }
@@ -46,10 +42,22 @@ public class ItemController {
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer size) {
         // TODO: 实现商品列表查询接口
-        // 提示：
-        // 1. 调用 itemService.getItemList(page, size)
-        // 2. 返回 Result.success(pageResult)
-        // 注意：返回的是 PageResult 对象，包含 list 和 total 两个字段
+        // 思路：调用 service 获取分页数据并返回
+
+        return null;
+    }
+
+    /**
+     * 搜索商品（分页）
+     * 无需认证
+     */
+    @GetMapping("/search")
+    public Result<PageResult<Item>> searchItems(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer size) {
+        // TODO: 实现商品搜索接口
+        // 思路：调用 service 搜索商品并返回分页结果
 
         return null;
     }
@@ -61,9 +69,6 @@ public class ItemController {
     @GetMapping("/{id}")
     public Result<Item> getItemById(@PathVariable Long id) {
         // TODO: 实现商品详情查询接口
-        // 提示：
-        // 1. 调用 itemService.getItemById(id)
-        // 2. 返回 Result.success(item)
 
         return null;
     }
@@ -75,11 +80,7 @@ public class ItemController {
     @GetMapping("/my")
     public Result<List<Item>> getMyItems(HttpServletRequest request) {
         // TODO: 实现查询我的发布接口
-        // 提示：
-        // 1. 从 request attribute 获取 userId
-        //    Long sellerId = (Long) request.getAttribute("userId");
-        // 2. 调用 itemService.getMyItems(sellerId)
-        // 3. 返回 Result.success(itemList)
+        // 思路：从 request 获取当前用户ID，查询该用户发布的商品
 
         return null;
     }
@@ -94,13 +95,7 @@ public class ItemController {
             @RequestBody Map<String, Integer> body,
             HttpServletRequest request) {
         // TODO: 实现更新商品状态接口
-        // 提示：
-        // 1. 从 request attribute 获取 userId
-        //    Long userId = (Long) request.getAttribute("userId");
-        // 2. 从 body 获取 status
-        //    Integer status = body.get("status");
-        // 3. 调用 itemService.updateItemStatus(id, status, userId)
-        // 4. 返回 Result.success(new HashMap<>())
+        // 思路：获取用户ID和新状态，调用 service 更新
 
         return null;
     }

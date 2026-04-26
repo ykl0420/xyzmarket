@@ -13,9 +13,9 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>campus-market</artifactId>
+    <artifactId>xyz-market</artifactId>
     <version>1.0.0</version>
-    <name>campus-market</name>
+    <name>xyz-market</name>
     <description>校园二手交易平台</description>
 
     <properties>

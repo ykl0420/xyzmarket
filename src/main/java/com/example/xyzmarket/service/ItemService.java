@@ -46,4 +46,13 @@ public interface ItemService {
      */
     void updateItemStatus(Long id, Integer status, Long userId);
 
+    /**
+     * 搜索商品（分页）
+     * @param keyword 搜索关键词
+     * @param page 页码
+     * @param size 每页数量
+     * @return 分页结果（包含商品列表和总数）
+     */
+    PageResult<Item> searchItems(String keyword, Integer page, Integer size);
+
 }

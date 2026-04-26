@@ -32,6 +32,7 @@
 - 微信一键登录
 - 商品发布与管理
 - 商品浏览（分页）
+- 商品搜索（关键词模糊匹配）
 - 订单创建与管理
 - 我的发布/订单查询
 - 商品/订单状态更新
@@ -189,6 +190,23 @@ Response:
 }
 ```
 
+#### 搜索商品（无需认证）
+```
+GET /api/item/search?keyword=自行车&page=1&size=10
+
+Response:
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "list": [...],
+    "total": 15
+  }
+}
+```
+
+搜索范围：商品标题和描述，使用 LIKE 模糊匹配。
+
 #### 商品详情（无需认证）
 ```
 GET /api/item/{id}
@@ -278,7 +296,7 @@ source init.sql
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/campus_market
+    url: jdbc:mysql://localhost:3306/xyz_market
     username: root
     password: 你的密码
 
@@ -352,7 +370,7 @@ curl http://localhost:8080/api/item/list?page=1&size=10
 ### 数据库连接失败
 - 检查 MySQL 是否启动
 - 检查 `application.yml` 中的用户名密码
-- 检查数据库 `campus_market` 是否已创建
+- 检查数据库 `xyz_market` 是否已创建
 
 ### 项目启动失败
 - 检查 JDK 版本是否为 17

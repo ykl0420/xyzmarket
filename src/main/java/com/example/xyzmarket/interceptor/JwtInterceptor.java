@@ -20,18 +20,7 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // TODO: 实现 token 验证逻辑
-        // 提示：
-        // 1. 从请求头获取 token
-        //    String token = request.getHeader("Authorization");
-        // 2. 验证 token 是否有效
-        //    if (token == null || !jwtUtil.validateToken(token)) {
-        //        response.setStatus(401);
-        //        return false;
-        //    }
-        // 3. 解析 userId 并存入 request attribute
-        //    Long userId = jwtUtil.getUserIdFromToken(token);
-        //    request.setAttribute("userId", userId);
-        // 4. 返回 true 放行
+        // 思路：从请求头获取 token，验证有效性，解析 userId 并存入 request attribute
 
         return true;
     }

@@ -20,16 +20,8 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Long publishItem(ItemDTO itemDTO, Long sellerId) {
         // TODO: 实现商品发布逻辑
-        // 提示：
-        // 1. 创建 Item 对象
-        //    Item item = new Item();
-        // 2. 复制属性
-        //    BeanUtils.copyProperties(itemDTO, item);
-        // 3. 设置发布者和初始状态
-        //    item.setSellerId(sellerId);
-        //    item.setStatus(0);  // 0-在售
-        // 4. 调用 itemMapper.insert(item) 保存商品
-        // 5. 返回 item.getId()
+        // 思路：将 DTO 转为实体，设置发布者和初始状态，保存到数据库
+        // 提示：可以使用 BeanUtils.copyProperties() 复制属性
 
         return null;
     }
@@ -37,11 +29,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public PageResult<Item> getItemList(Integer page, Integer size) {
         // TODO: 实现商品列表查询（分页）
-        // 提示：
-        // 1. 计算偏移量：int offset = (page - 1) * size;
-        // 2. 查询商品列表：List<Item> items = itemMapper.findList(offset, size);
-        // 3. 查询总数：long total = itemMapper.countAvailable();
-        // 4. 返回 new PageResult<>(items, total)
+        // 思路：计算偏移量，查询商品列表和总数，封装成 PageResult 返回
 
         return null;
     }
@@ -49,7 +37,6 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item getItemById(Long id) {
         // TODO: 根据ID查询商品详情
-        // 提示：直接调用 itemMapper.findById(id)
 
         return null;
     }
@@ -57,7 +44,6 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> getMyItems(Long sellerId) {
         // TODO: 查询我的发布列表
-        // 提示：直接调用 itemMapper.findBySellerId(sellerId)
 
         return null;
     }
@@ -65,13 +51,16 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void updateItemStatus(Long id, Integer status, Long userId) {
         // TODO: 更新商品状态
-        // 提示：
-        // 1. 根据ID查询商品
-        //    Item item = itemMapper.findById(id);
-        // 2. 校验权限：只有发布者可以修改
-        //    if (!item.getSellerId().equals(userId)) throw new RuntimeException("无权操作");
-        // 3. 调用 itemMapper.updateStatus(id, status)
+        // 思路：先查询商品，校验权限（只有发布者可以修改），再更新状态
 
+    }
+
+    @Override
+    public PageResult<Item> searchItems(String keyword, Integer page, Integer size) {
+        // TODO: 实现商品搜索（分页）
+        // 思路：计算偏移量，调用 mapper 搜索商品和统计总数，封装成 PageResult 返回
+
+        return null;
     }
 
 }

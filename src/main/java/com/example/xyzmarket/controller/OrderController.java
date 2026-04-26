@@ -27,11 +27,7 @@ public class OrderController {
     @PostMapping
     public Result<Long> createOrder(@Valid @RequestBody OrderDTO orderDTO, HttpServletRequest request) {
         // TODO: 实现创建订单接口
-        // 提示：
-        // 1. 从 request attribute 获取 userId
-        //    Long buyerId = (Long) request.getAttribute("userId");
-        // 2. 调用 orderService.createOrder(orderDTO, buyerId)
-        // 3. 返回 Result.success(orderId)
+        // 思路：从 request 获取买家ID，调用 service 创建订单
 
         return null;
     }
@@ -43,11 +39,7 @@ public class OrderController {
     @GetMapping("/my")
     public Result<List<Order>> getMyOrders(HttpServletRequest request) {
         // TODO: 实现查询我的订单接口
-        // 提示：
-        // 1. 从 request attribute 获取 userId
-        //    Long userId = (Long) request.getAttribute("userId");
-        // 2. 调用 orderService.getMyOrders(userId)
-        // 3. 返回 Result.success(orderList)
+        // 思路：从 request 获取用户ID，查询该用户的所有订单
 
         return null;
     }
@@ -62,13 +54,7 @@ public class OrderController {
             @RequestBody Map<String, Integer> body,
             HttpServletRequest request) {
         // TODO: 实现更新订单状态接口
-        // 提示：
-        // 1. 从 request attribute 获取 userId
-        //    Long userId = (Long) request.getAttribute("userId");
-        // 2. 从 body 获取 status
-        //    Integer status = body.get("status");
-        // 3. 调用 orderService.updateOrderStatus(id, status, userId)
-        // 4. 返回 Result.success(new HashMap<>())
+        // 思路：获取用户ID和新状态，调用 service 更新
 
         return null;
     }

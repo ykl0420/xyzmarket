@@ -24,8 +24,7 @@ public class JwtUtil {
      */
     public String generateToken(Long userId) {
         // TODO: 实现 JWT token 生成
-        // 使用 io.jsonwebtoken.Jwts 生成 token
-        // 包含 userId 和过期时间
+        // 思路：使用 JWT 库创建 token，包含 userId 和过期时间
         return null;
     }
 
