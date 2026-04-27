@@ -131,7 +131,7 @@ List<Item> findList(@Param("offset") int offset, @Param("size") int size);
 
 // 统计
 @Select("SELECT COUNT(*) FROM item WHERE status = 0")
-long countAvailable();
+long countItems();
 
 // 插入（@Options 用于获取自增 ID）
 @Insert("INSERT INTO user (openid, nickname, avatar_url) VALUES (#{openid}, #{nickname}, #{avatarUrl})")
@@ -194,7 +194,7 @@ SELECT COUNT(*) FROM item WHERE status = 0
 
 **ItemServiceImpl 实现思路**：
 - `publishItem(dto, sellerId)`：创建 Item 对象，设置 sellerId，调用 insert
-- `getItemList(page, size)`：计算 offset = (page-1)*size，调用 findList 和 countAvailable，返回 PageResult 对象
+- `getItemList(page, size)`：计算 offset = (page-1)*size，调用 findList 和 countItems，返回 PageResult 对象
 - `updateItemStatus(id, status, userId)`：先查商品验证是否是本人，再更新
 
 **OrderServiceImpl 实现思路**：
@@ -377,7 +377,7 @@ ErrorCode.NOT_FOUND    // 404
 4. `ItemMapper.findById` - 同上练习
 5. `ItemMapper.findBySellerId` - 排序查询
 6. `ItemMapper.findList` - 分页查询
-7. `ItemMapper.countAvailable` - 统计
+7. `ItemMapper.countItems` - 统计
 8. `ItemMapper.updateStatus` - 更新
 9. `OrderMapper` 的所有方法
 

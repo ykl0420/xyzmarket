@@ -14,7 +14,6 @@ public interface ItemMapper {
 
     /**
      * 插入商品
-     * TODO: 使用 @Insert 注解编写 SQL，使用 @Options 获取自增ID
      */
     @Insert("""
         INSERT INTO item (title,description,price,image_url,seller_id,status,create_time,update_time)
@@ -25,22 +24,25 @@ public interface ItemMapper {
 
     /**
      * 根据ID查询商品
-     * TODO: 实现 SQL
      */
     @Select("SELECT * FROM item WHERE id = #{id}")
     Item findById(@Param("id") Long id);
 
     /**
      * 查询在售商品列表（分页）
-     * TODO: 实现 SQL
      */
     @Select("SELECT * FROM item WHERE status = 0 LIMIT #{size} OFFSET #{offset}")
     List<Item> findList(@Param("offset") int offset, @Param("size") int size);
 
     /**
+     * 统计在售商品总数
+     */
+    @Select("SELECT COUNT(*) FROM item WHERE status = 0")
+    long countItems();
+
+    /**
      * 搜索在售商品（分页）
      * keyword需要在service层处理，例如添加通配符
-     * TODO: 使用 LIKE 实现模糊搜索，搜索标题和描述字段
      */
     @Select("SELECT * FROM item WHERE status = 0 AND (title LIKE #{keyword} OR description LIKE #{keyword}) LIMIT #{size} OFFSET #{offset}")
     List<Item> searchItems(@Param("keyword") String keyword, @Param("offset") int offset, @Param("size") int size);
@@ -48,30 +50,20 @@ public interface ItemMapper {
     /**
      * 统计在售商品符合搜索结果的总数
      * keyword需要在service层处理，例如添加通配符
-     * TODO: 使用 LIKE 统计符合搜索条件的商品数量
      */
     @Select("SELECT COUNT(*) FROM item WHERE status = 0 AND (title LIKE #{keyword} OR description LIKE #{keyword})")
     long countSearchResults(@Param("keyword") String keyword);
 
     /**
      * 根据发布者ID查询商品列表
-     * TODO: 实现 SQL
      */
     @Select("SELECT * FROM item WHERE seller_id = #{sellerId}")
     List<Item> findBySellerId(@Param("sellerId") Long sellerId);
 
     /**
      * 更新商品状态
-     * TODO: 实现 SQL
      */
     @Update("UPDATE item SET status=#{status} WHERE id = #{id}")
     int updateStatus(@Param("id") Long id, @Param("status") Integer status);
-
-    /**
-     * 统计在售商品总数
-     * TODO: 使用 @Select 注解编写 SQL
-     */
-    @Select("SELECT COUNT(*) FROM item WHERE status = 0")
-    long countAvailable();
 
 }
