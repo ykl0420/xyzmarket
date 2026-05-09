@@ -29,7 +29,9 @@ public class OrderController {
         // TODO: 实现创建订单接口
         // 思路：从 request 获取买家ID，调用 service 创建订单
 
-        return null;
+        Long buyerId = (Long)request.getAttribute("userId");
+        Long orderId = orderService.createOrder(orderDTO, buyerId);
+        return Result.success(orderId);
     }
 
     /**
@@ -41,7 +43,9 @@ public class OrderController {
         // TODO: 实现查询我的订单接口
         // 思路：从 request 获取用户ID，查询该用户的所有订单
 
-        return null;
+        Long userId = (Long)request.getAttribute("userId");
+        List<Order> orderList = orderService.getMyOrders(userId);
+        return Result.success(orderList);
     }
 
     /**
@@ -56,7 +60,10 @@ public class OrderController {
         // TODO: 实现更新订单状态接口
         // 思路：获取用户ID和新状态，调用 service 更新
 
-        return null;
+        Long userId = (Long)request.getAttribute("userId");
+        orderService.updateOrderStatus(id, body.get("status"), userId);
+        Map<String, Object> result = new HashMap<>();
+        return Result.success(result);
     }
 
 }
