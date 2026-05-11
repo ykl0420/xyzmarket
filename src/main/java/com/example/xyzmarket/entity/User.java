@@ -18,8 +18,6 @@ public class User {
 
     private String avatarUrl;
 
-    private String phone;
-
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

@@ -9,11 +9,12 @@
 #### 1. 微信登录流程
 
 ```
-1. 小程序调用 wx.login() 获取 code
-2. 将 code 发送到后端 /api/user/wxLogin
-3. 后端返回 userId 和 token
-4. 前端存储 token（wx.setStorageSync('token', token)）
-5. 后续请求在 header 中携带 token
+  1. 小程序调用 wx.login() 获取 code
+  2. 通过 chooseAvatar 按钮和 nickname 输入组件获取用户信息
+  3. 将 code、nickname、avatarUrl 发送到后端 /api/user/wxLogin
+  4. 后端返回 userId 和 token
+  5. 前端存储 token（wx.setStorageSync('token', token)）
+  6. 后续请求在 header 中携带 token
 ```
 
 #### 2. Token 使用方式
@@ -99,9 +100,17 @@ data: {
 **请求参数**：
 ```json
 {
-  "code": "微信登录返回的code"
+   "code": "微信登录返回的code",
+   "nickname": "用户昵称（首次注册时传入）", 
+   "avatarUrl": "用户头像URL（首次注册时传入）"
 }
 ```
+
+**字段说明**:
+- `code`：必填，调用 wx.login() 获取
+- `nickname`：选填，微信昵称，首次登录时传入
+- `avatarUrl`：选填，微信头像 URL，首次登录时传入
+
 
 **返回示例**：
 ```json

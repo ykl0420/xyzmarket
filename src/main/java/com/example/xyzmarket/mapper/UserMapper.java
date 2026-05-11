@@ -15,8 +15,8 @@ public interface UserMapper {
      * TODO: 实现 SQL
      */
     @Insert("""
-        INSERT INTO user(openid, nickname, avatar_url, phone, create_time, update_time)
-        VALUES (#{openid}, #{nickname}, #{avatarUrl}, #{phone}, #{createTime}, #{updateTime})
+        INSERT INTO user(openid, nickname, avatar_url, create_time, update_time)
+        VALUES (#{openid}, #{nickname}, #{avatarUrl}, #{createTime}, #{updateTime})
     """)
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int insert(User user);

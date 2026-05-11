@@ -34,6 +34,8 @@ public class UserServiceImpl implements UserService {
         String appid = wxConfig.getAppid();
         String secret = wxConfig.getSecret();
         String code = wxLoginDTO.getCode();
+        String nickname = wxLoginDTO.getNickname();
+        String avatarUrl = wxLoginDTO.getAvatarUrl();
 
         String jsonString = httpClientUtil.code2Session(appid, secret, code);
         JacksonJsonParser parser = new JacksonJsonParser();
@@ -46,9 +48,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             User newUser = new User();
             newUser.setOpenid(openid);
-            newUser.setNickname("<DEFAULT_NICKNAME>");
-            newUser.setPhone(null);
-            newUser.setAvatarUrl(null);
+            newUser.setNickname(nickname);
+            newUser.setAvatarUrl(avatarUrl);
             newUser.setCreateTime(LocalDateTime.now());
             newUser.setUpdateTime(LocalDateTime.now());
 
