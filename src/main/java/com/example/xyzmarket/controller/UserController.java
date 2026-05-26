@@ -29,7 +29,13 @@ public class UserController {
         // TODO: 实现微信登录接口
         // 思路：调用 service 获取用户ID，生成 JWT token，封装返回
 
-        return null;
+        Long userId = userService.wxLogin(wxLoginDTO);
+        String jwtToken = jwtUtil.generateToken(userId);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("userId", userId);
+        data.put("token", jwtToken);
+        return Result.success(data);
     }
 
 }

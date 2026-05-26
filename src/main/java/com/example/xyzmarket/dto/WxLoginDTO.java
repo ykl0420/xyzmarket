@@ -11,5 +11,6 @@ public class WxLoginDTO {
 
     @NotBlank(message = "code 不能为空")
     private String code;
-
+    private String nickname;
+    private String avatarUrl;
 }
