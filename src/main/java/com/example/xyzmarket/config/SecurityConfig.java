@@ -19,12 +19,12 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/api/**")
-                .excludePathPatterns(
-                        "/api/user/wxLogin",      // 登录接口
-                        "/api/item/list",         // 商品列表
-                        "/api/item/{id}"          // 商品详情
-                );
+                .addPathPatterns("/api/**");        // 详细放行规则移至拦截器内(JwtInterceptor.java)
+//                .excludePathPatterns(
+//                        "/api/user/wxLogin",      // 登录接口
+//                        "/api/item/list",         // 商品列表
+//                        "/api/item/{id}"          // 商品详情
+//                );
     }
 
 }

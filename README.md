@@ -16,7 +16,7 @@
 - MyBatis 3.0.3（注解方式）
 - MySQL 8.x
 - JWT（jjwt 0.12.5）
-- WebFlux（用于调用微信 API）
+- RestTemplate（用于调用微信 API）
 
 ### 前端
 - 微信小程序
@@ -98,7 +98,6 @@ src/main/java/com/example/xyzmarket/
 | openid | VARCHAR(64) | 微信唯一标识，唯一索引 |
 | nickname | VARCHAR(50) | 昵称 |
 | avatar_url | VARCHAR(255) | 头像 URL |
-| phone | VARCHAR(20) | 手机号 |
 | create_time | DATETIME | 创建时间 |
 | update_time | DATETIME | 更新时间 |
 
@@ -145,7 +144,9 @@ POST /api/user/wxLogin
 Content-Type: application/json
 
 {
-  "code": "微信登录返回的 code"
+  "code": "微信登录返回的 code",
+  "nickname": "用户昵称",
+  "avatarUrl": "用户头像URL"
 }
 
 Response:
@@ -356,11 +357,12 @@ curl http://localhost:8080/api/item/list?page=1&size=10
 
 ```
 1. 小程序调用 wx.login() 获取 code
-2. 小程序将 code 发送到后端 /api/user/wxLogin
-3. 后端用 code + appid + secret 调用微信服务器获取 openid
-4. 后端根据 openid 查询或创建用户
-5. 后端生成 JWT token 返回给小程序
-6. 小程序存储 token，后续请求携带 token
+2. 通过 chooseAvatar 按钮和 nickname 输入组件获取用户信息
+3. 将 code、nickname、avatarUrl 发送到后端 /api/user/wxLogin
+4. 后端用 code + appid + secret 调用微信服务器获取 openid
+5. 后端根据 openid 查询或创建用户，保存昵称和头像
+6. 后端生成 JWT token 返回给小程序
+7. 小程序存储 token，后续请求携带 token
 ```
 
 ---
