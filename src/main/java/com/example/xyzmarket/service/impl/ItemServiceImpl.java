@@ -25,6 +25,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = new Item();
         BeanUtils.copyProperties(itemDTO, item);
         item.setSellerId(sellerId);
+        item.setStatus(0);
         LocalDateTime now = LocalDateTime.now();
         item.setCreateTime(now);
         item.setUpdateTime(now);
@@ -58,7 +59,7 @@ public class ItemServiceImpl implements ItemService {
         if(!item.getSellerId().equals(userId)) {
             throw new BusinessException(ErrorCode.FORBIDDEN, "无权修改该商品");
         }
-        itemMapper.updateStatus(id, status);
+        itemMapper.updateStatus(id, status, LocalDateTime.now());
     }
 
     @Override
