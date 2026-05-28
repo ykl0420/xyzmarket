@@ -19,9 +19,6 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // TODO: 实现 token 验证逻辑
-        // 思路：从请求头获取 token，验证有效性，解析 userId 并存入 request attribute
-
         // 放行规则统一集中于拦截器开头
         // 无需认证的接口：登录、搜索商品、商品列表、商品详情
         String uri = request.getRequestURI();

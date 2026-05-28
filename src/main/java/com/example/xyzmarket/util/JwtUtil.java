@@ -37,8 +37,6 @@ public class JwtUtil {
      * @return JWT token 字符串
      */
     public String generateToken(Long userId) {
-        // TODO: 实现 JWT token 生成
-        // 思路：使用 JWT 库创建 token，包含 userId 和过期时间
         Date now = new Date();
         Date expDate = new Date(now.getTime() + expiration); // 过期时间
         // 利用builder链式调用往jwt中填入信息
@@ -59,7 +57,6 @@ public class JwtUtil {
      * @return 用户ID
      */
     public Long getUserIdFromToken(String token) {
-        // TODO: 实现从 token 解析 userId
         String subject = Jwts.parser()
                 .verifyWith(getKey())                // 用同样的 key 验证
                 .build()
@@ -77,7 +74,6 @@ public class JwtUtil {
      * @return 是否有效
      */
     public boolean validateToken(String token) {
-        // TODO: 实现 token 验证
         try {
             Jwts.parser().verifyWith(getKey()).build().parseSignedClaims(token);
             return true;

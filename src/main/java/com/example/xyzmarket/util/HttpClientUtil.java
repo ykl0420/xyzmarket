@@ -20,9 +20,6 @@ public class HttpClientUtil {
      * @return 包含 openid 的 JSON 字符串
      */
     public String code2Session(String appid, String secret, String code) {
-        // TODO: 实现调用微信 code2session 接口
-        // 思路：构造请求 URL，发送 HTTP GET 请求，返回 JSON 响应
-
         String url = String.format(
                 "https://api.weixin.qq.com/sns/jscode2session" + "?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code",
                 appid, secret, code

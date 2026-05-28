@@ -15,7 +15,6 @@ public interface OrderMapper {
 
     /**
      * 创建订单
-     * TODO: 实现 SQL
      */
     @Insert("""
         INSERT INTO orders (item_id, buyer_id, seller_id, status, create_time, update_time)
@@ -26,28 +25,24 @@ public interface OrderMapper {
 
     /**
      * 根据买家ID查询订单列表
-     * TODO: 实现 SQL
      */
     @Select("SELECT * FROM orders WHERE buyer_id = #{buyerId}")
     List<Order> findByBuyerId(@Param("buyerId") Long buyerId);
 
     /**
      * 根据卖家ID查询订单列表
-     * TODO: 实现 SQL
      */
     @Select("SELECT * FROM orders WHERE seller_id = #{sellerId}")
     List<Order> findBySellerId(@Param("sellerId") Long sellerId);
 
     /**
      * 根据ID查询订单
-     * TODO: 实现 SQL
      */
     @Select("SELECT * FROM orders WHERE id = #{id}")
     Order findById(@Param("id") Long id);
 
     /**
      * 更新订单状态
-     * TODO: 实现 SQL
      */
     @Update("UPDATE orders SET status = #{status}, update_time = #{updateTime} WHERE id = #{id}")
     int updateStatus(@Param("id") Long id, @Param("status") Integer status, @Param("updateTime")LocalDateTime updateTime);

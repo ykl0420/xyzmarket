@@ -1,6 +1,8 @@
 package com.example.xyzmarket.exception;
 
+import com.example.xyzmarket.common.ErrorCode;
 import com.example.xyzmarket.common.Result;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -19,4 +21,9 @@ public class GlobalExceptionHandler {
         return Result.error(e.getCode(), e.getMessage());
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result<Void> handleValidation(MethodArgumentNotValidException e) {
+        String message = e.getBindingResult().getFieldError().getDefaultMessage();
+        return Result.error(ErrorCode.BAD_REQUEST, message);
+    }
 }

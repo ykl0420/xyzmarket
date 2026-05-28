@@ -26,9 +26,6 @@ public class UserController {
      */
     @PostMapping("/wxLogin")
     public Result<Map<String, Object>> wxLogin(@Valid @RequestBody WxLoginDTO wxLoginDTO) {
-        // TODO: 实现微信登录接口
-        // 思路：调用 service 获取用户ID，生成 JWT token，封装返回
-
         Long userId = userService.wxLogin(wxLoginDTO);
         String jwtToken = jwtUtil.generateToken(userId);
 
