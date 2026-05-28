@@ -42,7 +42,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getItemById(Long id) {
-        return itemMapper.findById(id);
+        Item item = itemMapper.findById(id);
+        if (item == null) throw new BusinessException(ErrorCode.NOT_FOUND, "商品不存在");
+        return item;
     }
 
     @Override
