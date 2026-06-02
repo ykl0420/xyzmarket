@@ -32,7 +32,6 @@ public class User {
     private String openid;     // 微信唯一标识
     private String nickname;
     private String avatarUrl;  // 对应数据库 avatar_url（自动驼峰转换）
-    private String phone;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }
@@ -286,7 +285,7 @@ public boolean validateToken(String token) {
 
 ```java
 // 用 code 换取 openid
-public Mono<String> code2Session(String appid, String secret, String code) {
+public String code2Session(String appid, String secret, String code) {
     // 调用：https://api.weixin.qq.com/sns/jscode2session
     // 参数：appid, secret, js_code, grant_type=authorization_code
     // 返回 JSON，解析其中的 openid 字段

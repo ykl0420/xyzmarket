@@ -221,8 +221,13 @@ Authorization: Bearer <token>
 
 #### 更新商品状态（需认证）
 ```
-PUT /api/item/{id}/status?status=1
+PUT /api/item/{id}/status
 Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "status": 1
+}
 ```
 
 ### 订单接口
