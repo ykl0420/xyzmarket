@@ -30,5 +30,5 @@ jwt:
 # 腾讯云 IM 配置
 tencent:
   im:
-    sdkAppId: your_sdk_app_id
+    sdkAppId: 0
     secretKey: your_secret_key
