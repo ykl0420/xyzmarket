@@ -22,8 +22,10 @@ public class JwtInterceptor implements HandlerInterceptor {
         // 放行规则统一集中于拦截器开头
         // 无需认证的接口：登录、搜索商品、商品列表、商品详情
         String uri = request.getRequestURI();
-        if (uri.startsWith("/api/user/wxLogin") || uri.equals("/api/item/search")
-                || uri.equals("/api/item/list") || uri.matches("/api/item/\\d+")) return true;
+        if (uri.startsWith("/api/user/wxLogin")
+                || uri.equals("/api/item/search")
+                || uri.equals("/api/item/list")
+                || (uri.matches("/api/item/[^/]+") && !uri.equals("/api/item/my"))) return true;
 
         String header = request.getHeader("Authorization");
         if (header == null || !header.startsWith("Bearer ")) {
