@@ -47,4 +47,9 @@ public interface OrderMapper {
     @Update("UPDATE orders SET status = #{status}, update_time = #{updateTime} WHERE id = #{id}")
     int updateStatus(@Param("id") Long id, @Param("status") Integer status, @Param("updateTime")LocalDateTime updateTime);
 
+    /**
+     *  上传订单评价（仅买家）
+     */
+    @Update("UPDATE orders SET rating = #{rating}, review = #{review}, update_time = #{updateTime} WHERE id = #{id}")
+    int submitReview(@Param("id") Long id, @Param("rating") Integer rating, @Param("review") String review, @Param("updateTime")LocalDateTime updateTime);
 }

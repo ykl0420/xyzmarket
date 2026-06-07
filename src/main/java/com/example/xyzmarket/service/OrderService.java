@@ -31,4 +31,12 @@ public interface OrderService {
      */
     boolean updateOrderStatus(Long orderId, Integer status, Long userId);
 
+    /**
+     * 提交订单评价
+     * @param orderId 订单ID
+     * @param rating  评分（1-5）
+     * @param review  评价内容
+     * @param userId  当前用户ID（从 token 获取，用于权限校验）
+     */
+    void submitReview(Long orderId, Integer rating, String review, Long userId);
 }

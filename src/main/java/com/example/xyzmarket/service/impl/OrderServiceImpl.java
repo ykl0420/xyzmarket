@@ -62,4 +62,14 @@ public class OrderServiceImpl implements OrderService {
         return true;
     }
 
+    @Override
+    public void submitReview(Long orderId, Integer rating, String review, Long userId) {
+        Order order = orderMapper.findById(orderId);
+        if (order == null) throw new BusinessException(ErrorCode.NOT_FOUND, "订单不存在");
+        if (!userId.equals(order.getBuyerId())) throw new BusinessException(ErrorCode.FORBIDDEN, "仅买家可以评价订单");
+        if (order.getStatus() != 1) throw new BusinessException(ErrorCode.FORBIDDEN, "订单未完成，无法评价");
+        if (order.getRating() != null) throw new BusinessException(ErrorCode.FORBIDDEN, "该订单已评价");
+
+        orderMapper.submitReview(orderId, rating, review, LocalDateTime.now());
+    }
 }

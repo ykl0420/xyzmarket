@@ -2,6 +2,7 @@ package com.example.xyzmarket.controller;
 
 import com.example.xyzmarket.common.Result;
 import com.example.xyzmarket.dto.OrderDTO;
+import com.example.xyzmarket.dto.ReviewDTO;
 import com.example.xyzmarket.entity.Order;
 import com.example.xyzmarket.service.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -57,4 +58,18 @@ public class OrderController {
         return Result.success(result);
     }
 
+    /**
+     * 提交订单评价
+     * 需要 JWT 认证，仅买家可操作
+     */
+    @PostMapping("/{id}/review")
+    public Result<Map<String, Object>> submitReview(
+            @PathVariable Long id,
+            @Valid @RequestBody ReviewDTO reviewDTO,
+            HttpServletRequest request) {
+        Long userId = (Long)request.getAttribute("userId");
+        orderService.submitReview(id, reviewDTO.getRating(), reviewDTO.getReview(), userId);
+        Map<String, Object> result = new HashMap<>();
+        return Result.success(result);
+    }
 }

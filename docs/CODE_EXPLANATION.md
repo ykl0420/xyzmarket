@@ -53,9 +53,10 @@ DTO = Data Transfer Object，用于接收前端传来的请求参数。
 
 | 文件 | 用途 | 包含字段 |
 |------|------|----------|
-| `WxLoginDTO.java` | 微信登录 | code |
+| `WxLoginDTO.java` | 微信登录 | code, nickname, avatarUrl |
 | `ItemDTO.java` | 发布商品 | title, description, price, imageUrl |
 | `OrderDTO.java` | 创建订单 | itemId |
+| `ReviewDTO.java` | 提交评价 | rating (1-5), review |
 
 **为什么 ItemDTO 没有 sellerId？**
 
@@ -200,6 +201,7 @@ SELECT COUNT(*) FROM item WHERE status = 0
 - `createOrder(dto, buyerId)`：查商品获取 sellerId，创建 Order 对象，调用 insert
 - `getMyOrders(userId)`：同时查买入和卖出的订单
 - `updateOrderStatus(orderId, status, userId)`：验证权限后更新状态
+- `submitReview(orderId, rating, review, userId)`：验证买家身份、订单已完成、未评价后，写入评分和评价
 
 **ImServiceImpl 实现思路**：
 - `generateUserSig(userId)`：使用腾讯云 IM 的 TLSSigAPIv2 工具类生成 UserSig

@@ -37,6 +37,8 @@ CREATE TABLE orders (
     buyer_id BIGINT NOT NULL COMMENT '买家ID',
     seller_id BIGINT NOT NULL COMMENT '卖家ID',
     status INT DEFAULT 0 COMMENT '状态：0待确认 1已完成 2已取消',
+    rating INT COMMENT '评分 1-5',
+    review VARCHAR(500) COMMENT '评价内容',
     create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     INDEX idx_buyer (buyer_id),

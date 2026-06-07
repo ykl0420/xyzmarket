@@ -68,7 +68,8 @@ src/main/java/com/example/xyzmarket/
 ├── dto/                 # 请求参数对象
 │   ├── WxLoginDTO.java
 │   ├── ItemDTO.java
-│   └── OrderDTO.java
+│   ├── OrderDTO.java
+│   └── ReviewDTO.java
 ├── vo/                  # 返回对象封装
 │   └── PageResult.java
 ├── config/              # 配置类
@@ -122,6 +123,8 @@ src/main/java/com/example/xyzmarket/
 | buyer_id | BIGINT | 买家 ID |
 | seller_id | BIGINT | 卖家 ID |
 | status | INT | 状态（0-待确认，1-已完成，2-已取消） |
+| rating | INT | 评分（1-5，评价后才有值） |
+| review | VARCHAR(500) | 评价内容 |
 | create_time | DATETIME | 创建时间 |
 | update_time | DATETIME | 更新时间 |
 
@@ -259,6 +262,20 @@ Content-Type: application/json
   "status": 2
 }
 ```
+
+#### 提交订单评价（需认证）
+```
+POST /api/order/{id}/review
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "rating": 5,
+  "review": "卖家发货很快，物品完好"
+}
+```
+
+> 仅买家可评价；订单必须已完成（status=1）；不可重复评价。
 
 ### IM 接口
 
