@@ -3,7 +3,6 @@ package com.example.xyzmarket.mapper;
 import com.example.xyzmarket.entity.Item;
 import org.apache.ibatis.annotations.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -62,9 +61,13 @@ public interface ItemMapper {
     List<Item> findBySellerId(@Param("sellerId") Long sellerId);
 
     /**
-     * 更新商品状态
+     * 更新商品信息
      */
-    @Update("UPDATE item SET status=#{status}, update_time = #{updateTime} WHERE id = #{id}")
-    int updateStatus(@Param("id") Long id, @Param("status") Integer status, @Param("updateTime")LocalDateTime updateTime);
+    @Update("""
+        UPDATE item SET title=#{title}, description=#{description}, price=#{price},
+        image_url=#{imageUrl}, status=#{status}, update_time=#{updateTime}
+        WHERE id=#{id}
+    """)
+    int update(Item item);
 
 }

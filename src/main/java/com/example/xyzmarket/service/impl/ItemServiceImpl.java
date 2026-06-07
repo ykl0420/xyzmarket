@@ -53,7 +53,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void updateItemStatus(Long id, Integer status, Long userId) {
+    public void updateItemStatus(Long id, ItemDTO itemDTO, Integer status, Long userId) {
         Item item = itemMapper.findById(id);
         if(item == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND, "商品不存在");
@@ -61,7 +61,13 @@ public class ItemServiceImpl implements ItemService {
         if(!item.getSellerId().equals(userId)) {
             throw new BusinessException(ErrorCode.FORBIDDEN, "无权修改该商品");
         }
-        itemMapper.updateStatus(id, status, LocalDateTime.now());
+        if (itemDTO.getTitle() != null) item.setTitle(itemDTO.getTitle());
+        if (itemDTO.getDescription() != null) item.setDescription(itemDTO.getDescription());
+        if (itemDTO.getPrice() != null) item.setPrice(itemDTO.getPrice());
+        if (itemDTO.getImageUrl() != null) item.setImageUrl(itemDTO.getImageUrl());
+        if (status != null) item.setStatus(status);
+        item.setUpdateTime(LocalDateTime.now());
+        itemMapper.update(item);
     }
 
     @Override
