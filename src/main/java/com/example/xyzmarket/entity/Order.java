@@ -20,6 +20,10 @@ public class Order {
 
     private Integer status;
 
+    private Integer rating;
+
+    private String review;
+
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;

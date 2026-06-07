@@ -38,6 +38,7 @@ token 中已经包含了用户身份信息，后端会自动解析，**无需额
 - POST `/api/order` - 创建订单
 - GET `/api/order/my` - 我的订单
 - PUT `/api/order/{id}/status` - 更新订单状态
+- POST `/api/order/{id}/review` - 提交订单评价
 - GET `/api/im/getUserSig` - 获取 IM 签名
 
 **无需 Token 的接口**：
@@ -387,6 +388,8 @@ data: {
       "buyerId": 10,
       "sellerId": 20,
       "status": 1,
+      "rating": null,
+      "review": null,
       "createTime": "2026-04-22T10:30:00",
       "updateTime": "2026-04-22T10:30:00"
     }
@@ -425,6 +428,54 @@ data: {
   "message": "success",
   "data": {}
 }
+```
+
+---
+
+#### 3.4 提交订单评价
+
+**接口地址**：`POST /api/order/{id}/review`
+**是否需要认证**：是
+
+**路径参数**：
+- `id`：订单ID
+
+**请求参数**：
+```json
+{
+  "rating": 5,
+  "review": "卖家发货很快，物品完好"
+}
+```
+
+**字段说明**：
+- `rating`：必填，评分（1-5 整数）
+- `review`：选填，评价内容
+
+**注意**：只有订单的**买家**可以评价，且订单必须为已完成状态（status=1），已评价的订单不能重复评价
+
+**返回示例**：
+```json
+{
+  "code": 200,
+  "message": "success",
+  "data": {}
+}
+```
+
+**错误示例**：
+```json
+// 评分不合法（不在1-5范围）
+{"code": 400, "message": "评分最小为1", "data": null}
+
+// 未完成就评价
+{"code": 403, "message": "订单未完成，无法评价", "data": null}
+
+// 重复评价
+{"code": 403, "message": "该订单已评价", "data": null}
+
+// 非买家评价
+{"code": 403, "message": "仅买家可以评价订单", "data": null}
 ```
 
 ---
