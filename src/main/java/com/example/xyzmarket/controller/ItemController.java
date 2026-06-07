@@ -79,17 +79,22 @@ public class ItemController {
     }
 
     /**
-     * 更新商品状态
+     * 更新商品信息
      * 需要 JWT 认证，仅发布者可操作
      */
     @PutMapping("/{id}/status")
     public Result<Map<String, Object>> updateItemStatus(
             @PathVariable Long id,
-            @RequestBody Map<String, Integer> body,
+            @RequestBody Map<String, Object> body,
             HttpServletRequest request) {
-        Integer status = body.get("status");
-        Long userId = (Long)request.getAttribute("userId");
-        itemService.updateItemStatus(id, status, userId);
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setTitle((String) body.get("title"));
+        itemDTO.setDescription((String) body.get("description"));
+        itemDTO.setPrice(body.get("price") != null ? new java.math.BigDecimal(body.get("price").toString()) : null);
+        itemDTO.setImageUrl((String) body.get("imageUrl"));
+        Integer status = body.get("status") != null ? ((Number) body.get("status")).intValue() : null;
+        Long userId = (Long) request.getAttribute("userId");
+        itemService.updateItemStatus(id, itemDTO, status, userId);
         Map<String, Object> result = new HashMap<>();
         return Result.success(result);
     }

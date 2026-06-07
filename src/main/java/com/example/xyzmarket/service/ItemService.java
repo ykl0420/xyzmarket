@@ -39,12 +39,13 @@ public interface ItemService {
     List<Item> getMyItems(Long sellerId);
 
     /**
-     * 更新商品状态
+     * 更新商品信息
      * @param id 商品ID
+     * @param itemDTO 商品信息
      * @param status 状态
      * @param userId 操作用户ID（从 token 获取，用于权限校验）
      */
-    void updateItemStatus(Long id, Integer status, Long userId);
+    void updateItemStatus(Long id, ItemDTO itemDTO, Integer status, Long userId);
 
     /**
      * 搜索商品（分页）

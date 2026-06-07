@@ -222,16 +222,22 @@ GET /api/item/my
 Authorization: Bearer <token>
 ```
 
-#### 更新商品状态（需认证）
+#### 更新商品信息（需认证）
 ```
 PUT /api/item/{id}/status
 Authorization: Bearer <token>
 Content-Type: application/json
 
 {
+  "title": "新标题",
+  "description": "新描述",
+  "price": 99.99,
+  "imageUrl": "新图片URL",
   "status": 1
 }
 ```
+
+**说明**：请求体中只需包含需要更新的字段，未传字段保持原值不变。只有商品发布者本人可以更新。
 
 ### 订单接口
 
