@@ -34,7 +34,7 @@ token 中已经包含了用户身份信息，后端会自动解析，**无需额
 **需要 Token 的接口**：
 - POST `/api/item` - 发布商品
 - GET `/api/item/my` - 我的发布
-- PUT `/api/item/{id}/status` - 更新商品状态
+- PUT `/api/item/{id}/status` - 更新商品信息
 - POST `/api/order` - 创建订单
 - GET `/api/order/my` - 我的订单
 - PUT `/api/order/{id}/status` - 更新订单状态
@@ -308,7 +308,7 @@ data: {
 
 ---
 
-#### 2.6 更新商品状态
+#### 2.6 更新商品信息
 
 **接口地址**：`PUT /api/item/{id}/status`
 **是否需要认证**：是
@@ -316,9 +316,13 @@ data: {
 **路径参数**：
 - `id`：商品ID
 
-**请求参数**：
+**请求参数**（只需传入需要更新的字段，未传字段保持原值）：
 ```json
 {
+  "title": "新标题",
+  "description": "新描述",
+  "price": 50.00,
+  "imageUrl": "新图片URL",
   "status": 1
 }
 ```
@@ -328,7 +332,7 @@ data: {
 - `1` - 已售出
 - `2` - 已下架
 
-**注意**：只有商品发布者本人可以更新状态
+**注意**：只有商品发布者本人可以更新
 
 **返回示例**：
 ```json

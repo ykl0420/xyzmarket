@@ -138,8 +138,8 @@ long countItems();
 int insert(User user);
 
 // 更新
-@Update("UPDATE item SET status = #{status} WHERE id = #{id}")
-int updateStatus(@Param("id") Long id, @Param("status") Integer status);
+@Update("UPDATE item SET title=#{title}, description=#{description}, price=#{price}, image_url=#{imageUrl}, status=#{status}, update_time=#{updateTime} WHERE id=#{id}")
+int update(Item item);
 ```
 
 **关键点**：
@@ -194,7 +194,7 @@ SELECT COUNT(*) FROM item WHERE status = 0
 **ItemServiceImpl 实现思路**：
 - `publishItem(dto, sellerId)`：创建 Item 对象，设置 sellerId，调用 insert
 - `getItemList(page, size)`：计算 offset = (page-1)*size，调用 findList 和 countItems，返回 PageResult 对象
-- `updateItemStatus(id, status, userId)`：先查商品验证是否是本人，再更新
+- `updateItemStatus(id, dto, status, userId)`：先查商品验证是否是本人，再按需更新各字段（未传字段保持原值）
 
 **OrderServiceImpl 实现思路**：
 - `createOrder(dto, buyerId)`：查商品获取 sellerId，创建 Order 对象，调用 insert
@@ -377,7 +377,7 @@ ErrorCode.NOT_FOUND    // 404
 5. `ItemMapper.findBySellerId` - 排序查询
 6. `ItemMapper.findList` - 分页查询
 7. `ItemMapper.countItems` - 统计
-8. `ItemMapper.updateStatus` - 更新
+8. `ItemMapper.update` - 更新
 9. `OrderMapper` 的所有方法
 
 ### 阶段二：工具类
